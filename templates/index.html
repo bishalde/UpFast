@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
     <title>Homepage</title>
 </head>
 <body>
-    <h1>this the homepage</h1>
-
-    <img src="{% static '/img/pexels-pixabay-531321.jpg' %}" alt="" srcset="">
-</body>
+    <h1>Forms</h1>
+    <form action="/" method="post">
+        {% csrf_token %} 
+        {{ form }}
+    </form>
 </html>

@@ -19,5 +19,8 @@ from UpFast import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.homepage)
+    path('',views.homepage),
+    path('dp/',views.dp),
+    path('pc/',views.pc),
+    path('rw/',views.rw),
 ]

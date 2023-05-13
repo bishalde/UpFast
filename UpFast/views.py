@@ -1,4 +1,15 @@
 from django.shortcuts import render
+from django.http import HttpResponse,JsonResponse
+from .forms import UserForm 
 
 def homepage(request):
-    return render(request, 'index.html')
+    return HttpResponse("<h1>homepage</h1>")
+
+def dp(request):
+    return render(request,"dp.html")
+
+def pc(request):
+    return render(request,"pc.html")
+
+def rw(request):
+    return render(request,"rw.html")
