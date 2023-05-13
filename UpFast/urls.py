@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from UpFast import views
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,3 +27,5 @@ urlpatterns = [
     path('pc/',views.pc),
     path('rw/',views.rw),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
