@@ -12,3 +12,6 @@ def pc(request):
 
 def rw(request):
     return render(request,"rw.html")
+
+def sh(request):
+    return render(request,"sh.html")
