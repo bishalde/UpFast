@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,JsonResponse
-from .forms import UserForm 
+from django.http import HttpResponse
 
 def homepage(request):
     return HttpResponse("<h1>homepage</h1>")
