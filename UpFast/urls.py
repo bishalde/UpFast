@@ -27,6 +27,12 @@ urlpatterns = [
     path('pc/',views.pc),
     path('rw/',views.rw),
     path('sh/',views.sh),
+    path('fcfs/',views.fcfs),
+    path('rr/',views.rr),
+    path('dup/',views.dup),
+    path('mq/',views.mq),
+    path('sm/',views.sm),
+    path('o/',views.o),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

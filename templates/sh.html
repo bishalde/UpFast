@@ -9,6 +9,37 @@
 <body>
     <pre>
 
+//File has executable permission or not
+file='2'
+
+if [ -x $file ]
+then
+   echo "You have permission to execute $file"
+   chmod -x $file
+   echo "NOW,You NOT have permission to execute $file"
+
+else
+   echo "You do not have permission to execute $file"
+   chmod +x $file
+   echo "NOW,You have permission to execute $file"
+   ls -l
+fi
+
+echo "The List Of Subdirectories Are : "
+ls -d */
+
+#!/bin/bash
+pattern=$1
+#Week
+for file in *; do
+  if [ -f "$file" ]; then
+    if grep -q "$pattern" "$file"; then
+      echo "$file: pattern found"
+    else
+      echo "$file: pattern not found"
+    fi
+  fi
+done
 
 
 1.	Greater of 3 numbers :
@@ -95,6 +126,8 @@ do
 sum=$(($sum+i))
 done
 echo "sum of array elements : $sum"
+
+
 
 </pre>
 </body>

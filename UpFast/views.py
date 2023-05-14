@@ -15,3 +15,21 @@ def rw(request):
 
 def sh(request):
     return render(request,"sh.html")
+
+def fcfs(request):
+    return render(request,"fcfs.html")
+
+def rr(request):
+    return render(request,"rr.html")
+
+def dup(request):
+    return render(request,"dup.html")
+
+def mq(request):
+    return render(request,"mq.html")
+
+def sm(request):
+    return render(request,"sm.html")
+
+def o(request):
+    return render(request,"o.html")
