@@ -23,16 +23,7 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.homepage),
-    path('dp/',views.dp),
-    path('pc/',views.pc),
-    path('rw/',views.rw),
-    path('sh/',views.sh),
-    path('fcfs/',views.fcfs),
-    path('rr/',views.rr),
-    path('dup/',views.dup),
-    path('mq/',views.mq),
-    path('sm/',views.sm),
-    path('o/',views.o),
+    path('sym/',views.sym),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

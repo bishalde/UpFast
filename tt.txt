@@ -1,0 +1,227 @@
+!pip install SymPy
+
+from sympy import *
+import sympy
+print(N(sqrt(2),100))
+
+>>import sympy as sym
+>>a = sym.Rational(1, 2)
+>>a
+
+Constants like pi,e
+>>sym.pi**2 Answer is pi**2
+>>sym.pi.evalf() Answer is 3.14159265358979
+>> (sym.pi + sym.exp(1)).evalf() Answer is 5.85987448204884
+
+X AND Y
+>> x = sym.Symbol('x')
+>>y = sym.Symbol('y')
+>>x + y + x - y Answer is 2*x
+
+>> sym.expand((x + y) ** 3) Answer is x**3 + 3*x**2*y + 3*x*y**2 + y**3
+>> 3 * x * y ** 2 + 3 * y * x ** 2 + x ** 3 + y ** 3 Answer is x**3 + 3*x**2*y + 3*x*y**2 + y**3
+
+sym.simplify((x + x * y) / x)
+
+limit(function, variable, point)
+limit( sin(x)/x , x, 0)
+
+diff(sin(x),x,2) # 2nd derivative of sin(x)
+
+series(cos(x),x)
+
+Integrate(sin(x),x)
+Integrate(sin(x),(x,1,sym.pi/2))
+
+
+from socket import *
+
+s=socket(AF_INET,SOCK_STREAM)
+host=gethostname()
+port=9999
+
+s.connect((host,port))
+msg=s.recv(1024)
+
+print(msg.decode('ascii'))
+s.send(b'Hello server!')
+s.close() 
+
+
+
+from socket import *
+
+s=socket(AF_INET,SOCK_STREAM)
+host=gethostname()
+port=9999
+
+s.bind((host,port))
+s.listen(2)
+
+while True:
+    c,addr=s.accept()
+    print ('Got connection from',addr)
+    c.send(b'Thank you for connecting')
+    print(c.recv(1024).decode('ascii'))
+    c.close()
+
+//UDP
+import socket
+
+
+# Create a UDP socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Bind the socket to a specific IP address and port
+server_socket.bind(('localhost', 5000))
+
+# Receive data from client and send a response
+while True:
+    data, address = server_socket.recvfrom(1024) # Buffer size is 1024 bytes
+    print(f"Received message from {address}: {data.decode()}")
+    server_socket.sendto(b"Thanks for the message!", address)
+
+
+import socket
+
+# Create a UDP socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Send a message to the server
+message = "Hello, server!"
+client_socket.sendto(message.encode(), ('localhost', 5000))
+
+# Receive the response from the server
+response, server_address = client_socket.recvfrom(1024) # Buffer size is 1024 bytes
+print(f"Received response from {server_address}: {response.decode()}")
+
+//Pydatalog
+
+from pyDatalog import pyDatalog
+pyDatalog.create_atoms('parent,male,female,son,daughter,X,Y,Z')
++male('adam')
++female('anne')
++female('barney')
++male('james')
++parent('barney','adam')
++parent('james','anne')
+#The first rule is read as follows: for all X and Y, X is the son of Y if there exists X and Y such that Y is the parent of X and X is male.
+son(X,Y)<= male(X) & parent(Y,X)
+#The second rule is read as follows: for all X and Y, X is the daughter of Y if there exists X and Y such that Y is the parent of X and X is female.
+daughter(X,Y)<= parent(Y,X) & female(X)
+print(pyDatalog.ask('son(adam,X)'))
+print(pyDatalog.ask('daughter(anne,X)'))
+print(son('adam',X))
+
+pyDatalog.create_atoms('factorial, N')
+factorial[N] = N*factorial[N-1]
+factorial[1] = 1
+print(factorial[5]== N)
+
+from pyDatalog import pyDatalog
+pyDatalog.create_terms('X,Y,Z, works_in, department_size, manager, indirect_manager, count_of_indirect_reports')
+# Mary works in Production
++works_in('Mary', 'Production')
++works_in('Sam', 'Marketing')
++works_in('John', 'Production')
++works_in('John', 'Marketing')
++(manager['Mary'] == 'John')
++(manager['Sam'] == 'Mary')
++(manager['Tom'] == 'Mary')
+indirect_manager(X,Y) <= (manager[X] == Y)
+print(works_in(X, 'Marketing'))
+indirect_manager(X,Y) <= (manager[X] == Z) & indirect_manager(Z,Y)
+print(indirect_manager('Sam',X))
+
+from pyDatalog import pyDatalog as py
+py.create_terms("brother,father,cousin,grandson,descendent,X,Y,Z,W,a,b,c,d,e,f")
++father('a','b')
++father('a','c')
++father('b','d')
++father('b','e')
++father('c','f')
+brother(X,Y) <= (father(Z,X)) & (father(Z,Y)) & ~(X==Y)
+cousin(X,Y) <= (father(Z,X)) & (father(W,Y)) & (brother(Z,W))
+grandson(X,Y)<= (father(Y,Z)) & (father(Z,X))
+descendent(X,Y) <= (father(Y,X))
+descendent(X,Y) <= (father(Z,X)) & (descendent(Z,X))
+
+print(brother(X,Y))
+print(cousin(X,Y))
+print(grandson(X,Y))
+print(descendent(X,Y))
+
+Using filter() within map():
+c = map(lambda x:x+x,filter(lambda x: (x>=3), (1,2,3,4)))
+print(list(c))
+Using map() within filter():
+c = filter(lambda x: (x>=3),map(lambda x:x+x, (1,2,3,4))) #lambda x: (x>=3)
+print(list(c))
+Using map() and filter() within reduce():
+d = reduce(lambda x,y: x+y,map(lambda x:x+x,filter(lambda x: (x>=3), (1,2,3,4))))
+print(d)
+
+from functools import reduce
+# Use map to print the square of each numbers rounded# to two decimal places
+my_floats = [4.35, 6.09, 3.25, 9.77, 2.16, 8.88, 4.59]
+# Use filter to print only the names that are less than or equal to seven letters
+my_names = ["olumide", "akinremi", "josiah", "temidayo", "omoseun"]
+# Use reduce to print the product of these numbers
+my_numbers = [4, 6, 9, 23, 5]
+map_result = list(map(lambda x: round(x ** 2, 3), my_floats))
+filter_result = list(filter(lambda name: len(name) <= 7, my_names))
+reduce_result = reduce(lambda num1, num2: num1 * num2, my_numbers)
+print(map_result)
+print(filter_result)
+print(reduce_result)
+
+
+import threading
+
+def fact(n):
+    fact=1
+    while n>0:
+        fact*=n
+        n-=1
+    print(fact)
+    
+def digitsum(n):
+    factsum=0
+    while n>0:
+        factsum+=n%10
+        n=n//10
+    print(factsum)
+
+
+n=int(input('Enter a number: '))
+p1=threading.Thread(target=digitsum,args=(n,))
+p2=threading.Thread(target=fact,args=(n,))
+
+p1.start()
+p2.start()
+
+
+p1.join()
+p2.join()
+
+import multiprocessing
+
+def worker(num):
+
+print('Worker:', num)
+
+for i in range(num):
+
+print(i)
+
+return
+
+jobs = []
+
+for i in range(1,5):
+
+p = multiprocessing.Process(target=worker, args=(i+10,))
+
+jobs.append(p)
+
+p.start()
