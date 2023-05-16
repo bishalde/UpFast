@@ -25,6 +25,7 @@ urlpatterns = [
     path('',views.homepage),
     path('sym/',views.sym),
     path('c/',views.c),
+    path('gui/',views.gui),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

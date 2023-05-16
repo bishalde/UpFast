@@ -10,3 +10,6 @@ def sym(request):
 
 def c(request):
     return render(request,"c.html")
+
+def gui(request):
+    return render(request,"gui.html")

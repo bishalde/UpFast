@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUI</title>
+</head>
+<body>
+    <pre>
+
+//All
+Label
+
+Used to contain text or images
+
+Button
+
+Similar to a Label but provides additional functionality for mouse overs, presses, and releases as well as keyboard activity/events
+
+Canvas
+
+Provides ability to draw shapes (lines, ovals, polygons, rectangles); can contain images or bitmaps
+
+Radiobutton
+
+Set of buttons of which only one can be "pressed" (similar to HTML radio input)
+
+Checkbutton
+
+Set of boxes of which any number can be "checked" (similar to HTML checkbox input)
+
+Entry
+
+Single-line text field with which to collect keyboard input (similar to HTML text input)
+
+Frame
+
+Pure container for other widgets
+
+Listbox
+
+Presents user list of choices to pick from
+
+Menu
+
+Actual list of choices "hanging" from a Menubutton that the user can choose from
+
+Menubutton
+
+Provides infrastructure to contain menus (pulldown, cascading, etc.)
+
+Message
+
+Similar to a Label, but displays multi-line text
+
+Scale
+
+Linear "slider" widget providing an exact value at current setting; with defined starting and ending values
+
+Text
+
+Multi-line text field with which to collect (or display) text from user (similar to HTML TextArea)
+
+Scrollbar
+
+Provides scrolling functionality to supporting widgets, i.e., Text, Canvas, Listbox, and Entry
+
+Toplevel
+
+Similar to a Frame, but provides a separate window container
+
+
+//Button
+button = tk.Button(root, text='Stop', width=25, command=root.destroy)
+button.pack()
+
+
+import tkinter as tk
+from tkinter import messagebox
+def hello():
+msg = messagebox.showinfo( "GUI Event Demo","Button Demo")
+root = tk.Tk()
+root.geometry("200x200")
+b = tk.Button(root, text='Fire Me',command=hello)
+b.place(x=50,y=50)
+root.mainloop()
+
+
+
+//Label
+var = StringVar()
+label = Label( win, textvariable=var, relief=RAISED )
+
+# set label value
+var.set("Hey!? Welcome to StudyTonight")
+password = Label(win, text = "Password").place(x = 30, y = 90)  
+
+
+
+//ENTRY
+def hello():
+msg = messagebox.showinfo( "GUI Event Demo",t.get())
+root = tk.Tk()
+root.geometry("200x200")
+l1=tk.Label(root,text="Name:")
+l1.grid(row=0)
+t=tk.Entry(root)
+t.grid(row=0,column=1)
+b = tk.Button(root, text='Fire Me',command=hello)
+b.grid(row=1,columnspan=2);
+root.mainloop()
+
+
+
+
+//Checkbutton
+from tkinter import *
+
+def test():
+if(v1.get()==1 ):
+v2.set(0)
+print("Male")
+if(v2.get()==1):
+v1.set(0)
+print("Female")
+
+root= Tk()
+root.title('Checkbutton Demo')
+v1=IntVar()
+v2=IntVar()
+cb1=Checkbutton(root,text='Male', variable=v1,onvalue=1, offvalue=0, command=test)
+cb1.grid(row=0)
+cb2=Checkbutton(root,text='Female', variable=v2,onvalue=1, offvalue=0, command=test)
+cb2.grid(row=1)
+root.mainloop()
+
+
+//Radiobutton
+root= Tk()
+eometry("200x200")
+radio=IntVar()
+rb1=Radiobutton(root,text='Red', variable=radio,width=25,value=1, command=choice)
+rb1.grid(row=0)
+rb2=Radiobutton(root,text='Blue', variable=radio,width=25,value=2, command=choice)
+rb2.grid(row=1)
+rb3=Radiobutton(root,text='Green', variable=radio,width=25,value=3, command=choice)
+rb3.grid(row=3)
+root.mainloop()
+
+
+//Scale
+
+from tkinter import messagebox
+root= Tk()
+root.title('Scale Demo')
+root.geometry("200x200")
+def slide():
+msg = messagebox.showinfo( "GUI Event Demo",v.get())
+v = DoubleVar()
+scale = Scale( root, variable = v, from_ = 1, to = 50, orient = HORIZONTAL)
+scale.pack(anchor=CENTER)
+btn = Button(root, text="Value", command=slide)
+btn.pack(anchor=CENTER)
+root.mainloop()
+
+//LABELFRAME
+from tkinter import *   
+win = Tk()  
+win.geometry("300x200")  
+labelframe1 = LabelFrame(win, text="Happy Thoughts!!!")  
+labelframe1.pack(fill="both", expand="yes")  
+toplabel = Label(labelframe1, text="You can put your happy thoughts here")  
+toplabel.pack()  
+labelframe2 = LabelFrame(win, text = "Changes You want!!")  
+labelframe2.pack(fill="both", expand = "yes")  
+bottomlabel = Label(labelframe2, text = "You can put here the changes you want,If any!")  
+bottomlabel.pack()  
+win.mainloop()  
+
+//Spinbox
+from tkinter import *
+
+from tkinter import messagebox
+root= Tk()
+root.title('Scale Demo')
+root.geometry("200x200")
+def slide():
+msg = messagebox.showinfo( "SpinBox Event Demo",spin.get())
+spin = Spinbox(root, from_= 0, to = 25)
+spin.pack(anchor=CENTER)
+btn = Button(root, text="Value", command=slide)
+btn.pack(anchor=CENTER)
+root.mainloop()
+
+
+//Listbox
+from tkinter import *
+
+top = Tk()
+
+top.geometry("200x250")
+
+lbl = Label(top, text="List of Programming Languages")
+
+listbox = Listbox(top)
+
+listbox.insert(1,"Python")
+
+listbox.insert(2, "Java")
+
+listbox.insert(3, "C")
+
+listbox.insert(4, "C++")
+
+lbl.pack()
+listbox.pack()
+  
+top.mainloop()
+
+
+//Scrollbar
+from tkinter import *  
+  
+win= Tk()  
+sbb = Scrollbar(win)  
+sbb.pack(side = RIGHT, fill = Y)  
+  
+mylist = Listbox(win, yscrollcommand = sbb.set)  
+  
+for line in range(45):  
+    mylist.insert(END, "Value " + str(line))  
+  
+mylist.pack(side = LEFT)
+sbb.config(command = mylist.yview)
+  
+mainloop()
+
+
+//Menubutton
+from tkinter import *
+from tkinter import messagebox
+root= Tk()
+root.title('Scale Demo')
+root.geometry("200x200")
+
+menubutton = Menubutton(root, text = "File", relief = FLAT)
+menubutton.grid()
+menubutton.menu = Menu(menubutton)
+menubutton["menu"]=menubutton.menu
+menubutton.menu.add_checkbutton(label = "New", variable=IntVar(),command=)
+menubutton.menu.add_checkbutton(label = "Open", variable = IntVar())
+menubutton.pack()
+root.mainloop()
+
+
+menubutton = Menubutton(root, text="File")
+menubutton.grid()
+menubutton.menu = Menu(menubutton, tearoff = 0)
+menubutton["menu"] = menubutton.menu
+menubutton.menu.add_command(label="Create
+new",command=new)
+menubutton.menu.add_command(label="Open",command=dis
+p)
+menubutton.menu.add_separator()
+menubutton.menu.add_command(label="Exit",command=root.
+quit)
+menubutton.pack()
+
+
+
+
+    </pre>
+</body>
+</html>
