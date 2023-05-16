@@ -107,6 +107,89 @@ print(f"Received response from {server_address}: {response.decode()}")
 
 //Pydatalog
 
+
+
+
+from pyDatalog import pyDatalog
+
+# Define the existing predicates
+pyDatalog.create_terms('male, female, parent')
+
+# Define the new predicates
+
+# Father rule: X is the father of Y if X is male and X is a parent of Y
+pyDatalog.create_terms('father')
+father(X, Y) <= male(X) & parent(X, Y)
+
+# Sister rule: X is the sister of Y if X is female, X is a parent of Z, and Z is a parent of Y
+pyDatalog.create_terms('sister')
+sister(X, Y) <= female(X) & parent(X, Z) & parent(Z, Y)
+
+# Grandmother rule: X is the grandmother of Y if X is female, X is a parent of Z, and Z is a parent of Y
+pyDatalog.create_terms('grandmother')
+grandmother(X, Y) <= female(X) & parent(X, Z) & parent(Z, Y)
+
+# Cousin rule: X is the cousin of Y if X is a parent of Z, Z is a sibling of Y, and X is not the parent of Y
+pyDatalog.create_terms('cousin')
+cousin(X, Y) <= parent(X, Z) & sibling(Z, Y) & (X != Y)
+
+# Uncle rule: X is the uncle of Y if X is male, X is a sibling of Z, and Z is a parent of Y
+pyDatalog.create_terms('uncle')
+uncle(X, Y) <= male(X) & sibling(X, Z) & parent(Z, Y)
+
+# Define the facts
+
+# Facts for the parent relation
++parent('John', 'Mary')
++parent('John', 'David')
++parent('Mary', 'Tom')
++parent('Mary', 'Lisa')
++parent('David', 'Alice')
+
+# Facts for the male relation
++male('John')
++male('David')
++male('Tom')
+
+# Facts for the female relation
++female('Mary')
++female('Lisa')
++female('Alice')
+
+# Query the new predicates
+
+print(f"\nFather:")
+print(father('John', 'Mary'))  # John is the father of Mary
+print(father('John', 'David'))  # John is the father of David
+print(father('John', 'Alice'))  # John is not the father of Alice
+
+print(f"\nSister:")
+print(sister('Mary', 'David'))  # Mary is the sister of David
+print(sister('Lisa', 'Tom'))  # Lisa is not the sister of Tom
+
+print(f"\nGrandmother:")
+print(grandmother('Mary', 'Tom'))  # Mary is the grandmother of Tom
+print(grandmother('Mary', 'Alice'))  # Mary is not the grandmother of Alice
+
+print(f"\nCousin:")
+print(cousin('Mary', 'Lisa'))  # Mary is the cousin of Lisa
+print(cousin('John', 'Alice'))  # John is the cousin of Alice
+print(cousin('Mary', 'Tom'))  # Mary is not the cousin of Tom
+
+print(f"\nUncle:")
+print(uncle('John', 'Tom'))  # John is the uncle of Tom
+print(uncle('John', 'Alice'))  # John is not the uncle of Alice
+
+
+
+
+
+
+
+
+
+
+
 from pyDatalog import pyDatalog
 pyDatalog.create_atoms('parent,male,female,son,daughter,X,Y,Z')
 +male('adam')
@@ -184,6 +267,184 @@ reduce_result = reduce(lambda num1, num2: num1 * num2, my_numbers)
 print(map_result)
 print(filter_result)
 print(reduce_result)
+
+
+def has_failed(marks):
+    return any(mark < 40 for mark in marks)
+
+def find_failed_students(students_marks):
+    failed_students = filter(has_failed, students_marks)
+    return list(failed_students)
+
+# Example data: list of lists containing marks of students in 5 subjects
+students_marks = [
+    [60, 70, 45, 80, 55],  # Student 1
+    [35, 40, 30, 45, 50],  # Student 2 (failed in one subject)
+    [70, 65, 75, 80, 90],  # Student 3
+    [50, 60, 65, 70, 75],  # Student 4
+    [30, 45, 40, 35, 50],  # Student 5 (failed in two subjects)
+]
+
+failed_students = find_failed_students(students_marks)
+print("Failed Students:")
+for student in failed_students:
+    print(student)
+
+
+    class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+class Manager(Employee):
+    def __init__(self, name, salary, department):
+        super().__init__(name, salary)
+        self.department = department
+
+    def __str__(self):
+        return f"Manager: {self.name}, Department: {self.department}, Salary: {self.salary}"
+
+class Executive(Manager):
+    def __str__(self):
+        return f"Executive: {super().__str__()}"
+
+
+# Testing the classes and methods
+employee1 = Employee("John Doe", 50000)
+manager1 = Manager("Jane Smith", 75000, "Sales")
+executive1 = Executive("Mark Johnson", 100000, "Marketing")
+
+print(employee1.name, employee1.salary)
+print(manager1.name, manager1.department, manager1.salary)
+print(executive1.name, executive1.department, executive1.salary)
+
+print(manager1)
+print(executive1)
+
+
+
+
+
+tuition = 10000  # Initial tuition
+annual_increase = 0.05  # 5% annual increase
+
+# Computing tuition in ten years
+for _ in range(10):
+    tuition += tuition * annual_increase
+
+tuition_in_ten_years = tuition
+
+# Computing total cost of four years' worth of tuition starting ten years from now
+total_cost = 0
+for _ in range(4):
+    total_cost += tuition
+    tuition += tuition * annual_increase
+
+print(f"Tuition in ten years: ${tuition_in_ten_years:.2f}")
+print(f"Total cost of four years' worth of tuition starting ten years from now: ${total_cost:.2f}")
+
+
+
+class Customer:
+    def __init__(self, name, address):
+        self.name = name
+        self.address = address
+
+
+def find_customers_nearby(customer_list, name=None):
+    nearby_customers = []
+
+    # If a name is given, find customers of the same bank with nearby addresses
+    if name:
+        for customer in customer_list:
+            if customer.name == name:
+                bank_name = extract_bank_name(customer.address)
+                nearby_customers = [
+                    c for c in customer_list
+                    if c.name != name and extract_bank_name(c.address) == bank_name
+                ]
+                break
+
+    return nearby_customers
+
+
+def extract_bank_name(address):
+    # Simple implementation to extract bank name from address
+    # You can modify this function based on your actual address format
+    return address.split(',')[0].strip().upper()
+
+
+# Example data: list of customers
+customer_list = [
+    Customer("John", "Bank of America, 123 Main St, New York, 10001"),
+    Customer("Jane", "Chase Bank, 456 Elm St, New York, 10005"),
+    Customer("Alex", "Wells Fargo, 789 Oak St, New York, 10003"),
+    Customer("Emily", "Bank of America, 987 Pine St, New York, 10002"),
+    Customer("Mike", "Chase Bank, 321 Maple St, New York, 10004"),
+]
+
+# Example usage: Find customers nearby based on a given name
+name = "John"
+nearby_customers = find_customers_nearby(customer_list, name)
+
+print(f"Customers nearby {name}:")
+for customer in nearby_customers:
+    print(customer.name, customer.address)
+
+
+
+
+
+
+
+
+
+    class Vehicle:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+
+    def update_vehicle_data(self, make=None, model=None, year=None):
+        if make:
+            self.make = make
+        if model:
+            self.model = model
+        if year:
+            self.year = year
+
+    def display_vehicle_data(self):
+        print(f"Make: {self.make}")
+        print(f"Model: {self.model}")
+        print(f"Year: {self.year}")
+
+
+class Bus(Vehicle):
+    def update_bus_data(self, seating_capacity):
+        self.seating_capacity = seating_capacity
+
+    def display_bus_data(self):
+        print(f"Seating Capacity: {self.seating_capacity}")
+
+
+# Example usage:
+vehicle1 = Vehicle("Toyota", "Camry", 2020)
+vehicle1.display_vehicle_data()
+
+print()
+
+bus1 = Bus("Volvo", "VNL", 2018)
+bus1.display_vehicle_data()
+bus1.update_bus_data(50)
+bus1.display_bus_data()
+
+
+
+
+
+
+
+
 
 
 import threading
